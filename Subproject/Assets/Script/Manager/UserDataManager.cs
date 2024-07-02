@@ -100,7 +100,7 @@ namespace UserDataManager
                     {
                         CheckError(task.Exception as AggregateException);
                         //Debug.Log("CreateUser Faulted error");
-                        AsyncError?.Invoke("∞Ë¡§ ª˝º∫ Ω«∆–");
+                        AsyncError?.Invoke("Í≥ÑÏ†ï ÏÉùÏÑ± Ïã§Ìå®");
                         return;
                     }
                     //User = task.Result
@@ -124,7 +124,7 @@ namespace UserDataManager
                     {
                         CheckError(task.Exception as AggregateException);
                         //Debug.Log("SignIn Faulted error");
-                        AsyncError?.Invoke("∑Œ±◊¿Œ Ω«∆–");
+                        AsyncError?.Invoke("Î°úÍ∑∏Ïù∏ Ïã§Ìå®");
                         return;
                     }
                     //User = task.Result;

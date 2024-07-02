@@ -32,7 +32,7 @@ public class CreatePopup : MonoBehaviour
             return;
         }
 
-        PopupManager.PopupData Data = Instance.CreatePopup("·Î±×ÀÎ", "È¸¿ø°¡ÀÔ", "·Î±×ÀÎ", GetComponent<Transform>(), PopupManager.EPopupContent.LogIn);
+        PopupManager.PopupData Data = Instance.CreatePopup("ë¡œê·¸ì¸", "íšŒì›ê°€ì…", "ë¡œê·¸ì¸", GetComponent<Transform>(), PopupManager.EPopupContent.LogIn);
         if (Data == null)
         {
             Debug.Log("PopupManager CreatePopup error");
@@ -62,7 +62,7 @@ public class CreatePopup : MonoBehaviour
             Debug.Log("PopupManager GetInstance error");
             return;
         }
-        PopupManager.PopupData Data = Instance.CreatePopup("È¸¿ø°¡ÀÔ", null, "»ı¼º", GetComponent<Transform>(), PopupManager.EPopupContent.CreateId);
+        PopupManager.PopupData Data = Instance.CreatePopup("íšŒì›ê°€ì…", null, "ìƒì„±", GetComponent<Transform>(), PopupManager.EPopupContent.CreateId);
         if (Data == null)
         {
             Debug.Log("PopupManager CreatePopup error");
