@@ -1,5 +1,6 @@
-Subproject
+Subproject(유니티)
 ==========
+
 유니티에서 FireBase 연동
 ------------------------
 연관 스크립트 : Manager/UserDataManager.cs
@@ -17,7 +18,6 @@ Excel을 이용한 DataTable 구현
 연관 스크립트 : CSVToJsonConverter, Table/Base/DataTableBase, Table/..
  - 엑셀 파일을 CSV로 저장하고 에디터 커스터마이징으로 csv파일을 Json으로 컨버트 할수있도록 구현
  - json파일로 저장된 DataTable을 읽고 List형태로 저장하여 사용하기 용이하도록 구현
-
 
 유니티 에서 팝업 시스템을 구현
 ------------------------------
