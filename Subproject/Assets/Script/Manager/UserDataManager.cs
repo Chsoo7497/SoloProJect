@@ -16,12 +16,17 @@ namespace UserDataManager
     {
         public string Nickname;
         public int Rank;
+
+        public UserDatabase()
+        {
+        }
+
         public UserDatabase(string NewNickname)
         {
             this.Nickname = NewNickname;
             this.Rank = 0;
         }
-        public void GetUser(UserDatabase Data)
+        public void SetUser(UserDatabase Data)
         {
             this.Nickname = Data.Nickname;
             this.Rank = Data.Rank;
@@ -80,6 +85,18 @@ namespace UserDataManager
                 Debug.Log(e.DatabaseError.Message);
             }
 
+        }
+
+        public string GetUserId()
+        {
+            if (Auth.CurrentUser == User)
+            {
+                if (Auth.CurrentUser != null)
+                {
+                    return UserId;
+                }
+            }
+            return null;
         }
 
         public async void CreateUser(string Id, string Passward, string Nickname)
@@ -147,16 +164,18 @@ namespace UserDataManager
                 else if (task.IsCompleted)
                 {
                     DataSnapshot Snapshot = task.Result;
-
-                    foreach (DataSnapshot data in Snapshot.Children)
-                    {
-                        IDictionary Data = (IDictionary)data.Value;
-                        UserData.Nickname = (string)Data["Nickname"];
-                        UserData.Rank = (int)Data["Rank"];
-                    }
+                    Debug.Log(Snapshot.GetRawJsonValue());
+                    UserData = JsonUtility.FromJson<UserDatabase>(Snapshot.GetRawJsonValue());
+                    Debug.Log(UserData.Nickname);
+                    //foreach (DataSnapshot data in Snapshot.Children)
+                    //{
+                    //    IDictionary Data = (IDictionary)data.Value;
+                    //    UserData.Nickname = (string)Data["Nickname"];
+                    //    UserData.Rank = (int)Data["Rank"];
+                    //}
                 }
 
-            });
+            }, TaskScheduler.FromCurrentSynchronizationContext());
         }
         void CheckError(AggregateException ex)
         {

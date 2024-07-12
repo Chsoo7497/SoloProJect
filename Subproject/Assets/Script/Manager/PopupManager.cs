@@ -49,38 +49,49 @@ namespace PopupManager
         //null 시 팝업 구현 실패
         //PopupData.Content?.GetComponent<EPopupContent의 스크립트>를 받아와 설정해줌 외부에서 팝업 설정 가능
         //PopupData.OnClick?을 통해 버튼 클릭에 따른 동작 설정 가능
-        public PopupData CreatePopup(string Title, string Yes, string No, Transform ParentTransform, EPopupContent Content)
+        public PopupData CreatePopup(int ID)
         {
-            PopupData Data;
             // Resources/Prefabs/Popup/PopupUI.prefab 로드
-            GameObject PopupPrefab = Resources.Load("Prefabs/Popup/PopupUI", typeof(GameObject)) as GameObject;
+            GameObject PopupPrefab = Resources.Load<GameObject>("Prefabs/UI/Popup/PopupUI");
             if (PopupPrefab == null)
             {
                 Debug.Log("Popup prefab Load error");
                 return null;
             }
-            GameObject Popup = MonoBehaviour.Instantiate(PopupPrefab, ParentTransform) as GameObject;
+            GameObject Popup = MonoBehaviour.Instantiate(PopupPrefab) as GameObject;
             if (Popup == null)
             {
                 Debug.Log("Popup prefab Instantiate error");
                 return null;
             }
-
+            DataTablePopup PopupTable = DataTablePopup.GetInstance();
+            if (PopupTable == null)
+            {
+                Debug.Log("PopupTable GetInstance error");
+                return null;
+            }
             // 콘텐츠 prefab 로드
-            GameObject ContentPrefab = Resources.Load(GetContentPath(Content), typeof(GameObject)) as GameObject;
+            GameObject ContentPrefab = PopupTable.GetContentPrefab(ID);
             if (ContentPrefab == null)
             {
                 Debug.Log("Content prefab Load error");
                 return null;
             }
 
-            PopupDefault popupDefault = Popup.GetComponent<PopupDefault>();
-            if (popupDefault == null)
+            DataTablePopup_Data popup_Data = PopupTable.FindPopup_Data(ID);
+            if (popup_Data == null)
             {
-                Debug.Log("GetComponent popupDefault error");
+                Debug.Log("popup_Data Find error");
                 return null;
             }
-            Data = popupDefault.SetPopup(Title, Yes, No, ContentPrefab);
+
+            PopupDesc Desc = Popup.GetComponent<PopupDesc>();
+            if (Desc == null)
+            {
+                Debug.Log("GetComponent PopupDesc error");
+                return null;
+            }
+            PopupData Data = Desc.SetPopup(popup_Data.Title, popup_Data.Yes, popup_Data.No, ContentPrefab);
             if (Data == null)
             {
                 Debug.Log("popupDefault SetPopup error");
@@ -105,21 +116,5 @@ namespace PopupManager
             Popup.SetActive(true);
             return Data;
         }
-
-        public string GetContentPath(EPopupContent Content)
-        {
-            switch (Content)
-            {
-                case EPopupContent.LogIn:
-                    return "Prefabs/Popup/Content/LogIn";
-                case EPopupContent.CreateId:
-                    return "Prefabs/Popup/Content/CreateId";
-                case EPopupContent.Notice:
-                    return "Prefabs/Popup/Content/Notice";
-                default:
-                    return null;
-            }
-        }
-        
     }
 }

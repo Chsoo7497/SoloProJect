@@ -1,0 +1,26 @@
+[
+  {
+    "ID":1,
+    "Title":"로그인",
+    "Yes":"회원가입",
+    "No":"로그인",
+    "EPopupContent":"LogIn",
+    "Path":"Prefabs/UI/Popup/Content/LogIn"
+  },
+  {
+    "ID":2,
+    "Title":"회원가입",
+    "Yes":"",
+    "No":"가입",
+    "EPopupContent":"CreateId",
+    "Path":"Prefabs/UI/Popup/Content/CreateId"
+  },
+  {
+    "ID":3,
+    "Title":"",
+    "Yes":"",
+    "No":"",
+    "EPopupContent":"Notice",
+    "Path":"Prefabs/UI/Popup/Content/Notice"
+  }
+]
