@@ -36,14 +36,24 @@ public class UIController : MonoBehaviour
             Debug.Log("UIManager GetInstance error");
             return;
         }
-        Instance.ChangeActiveUI += ChangeActiveUI;
+        Instance.AddUIByLayer += AddUIByLayer;
         StartDefultUI();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+    private void OnDestroy()
+    {
+        UIManager.UIManager Instance = UIManager.UIManager.GetInstance();
+        if (Instance == null)
+        {
+            Debug.Log("UIManager GetInstance error");
+            return;
+        }
+        Instance.AddUIByLayer -= AddUIByLayer;
     }
 
     void StartDefultUI()
@@ -54,7 +64,7 @@ public class UIController : MonoBehaviour
         }
     }
 
-    void ChangeActiveUI()
+    void AddUIByLayer(UIScreenLayer UILayer, GameObject UIObject)
     {
 
         UIManager.UIManager Instance = UIManager.UIManager.GetInstance();
@@ -63,12 +73,6 @@ public class UIController : MonoBehaviour
             Debug.Log("UIManager GetInstance error");
             return;
         }
-        foreach(var UIPrefabLayer in Instance.UIPrefabs)
-        {
-            foreach(var UIPrefab in UIPrefabLayer.Value)
-            {
-                UIPrefab.transform.SetParent(UILayers[UIPrefabLayer.Key].transform, false);
-            }
-        }
+        UIObject.transform.SetParent(UILayers[UILayer].transform, false);
     }
 }

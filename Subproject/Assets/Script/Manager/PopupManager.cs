@@ -64,7 +64,7 @@ namespace PopupManager
                 Debug.Log("Popup prefab Instantiate error");
                 return null;
             }
-            DataTablePopup PopupTable = DataTablePopup.GetInstance();
+            DataTable_Popup PopupTable = DataTable_Popup.GetInstance();
             if (PopupTable == null)
             {
                 Debug.Log("PopupTable GetInstance error");
@@ -78,8 +78,8 @@ namespace PopupManager
                 return null;
             }
 
-            DataTablePopup_Data popup_Data = PopupTable.FindPopup_Data(ID);
-            if (popup_Data == null)
+            DataTable_PopupData PopupTableData = PopupTable.FindPopup_Data(ID);
+            if (PopupTableData == null)
             {
                 Debug.Log("popup_Data Find error");
                 return null;
@@ -91,11 +91,12 @@ namespace PopupManager
                 Debug.Log("GetComponent PopupDesc error");
                 return null;
             }
-            PopupData Data = Desc.SetPopup(popup_Data.Title, popup_Data.Yes, popup_Data.No, ContentPrefab);
+            PopupData Data = Desc.SetPopup(PopupTableData.Title, PopupTableData.Yes, PopupTableData.No, ContentPrefab);
             if (Data == null)
             {
                 Debug.Log("popupDefault SetPopup error");
                 MonoBehaviour.Destroy(Popup);
+                return null;
             }
             Data.Popup = Popup;
             Data.OnClick.AddListener((ClickState) =>

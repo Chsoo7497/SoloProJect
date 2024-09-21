@@ -64,7 +64,7 @@
     <Compile Include="Assets\Script\UI\Popup\Content\PopupContentLogIn.cs" />
     <Compile Include="Assets\Script\CSVToJsonConverter.cs" />
     <Compile Include="Assets\Script\UI\Popup\PopupDesc.cs" />
-    <Compile Include="Assets\Script\Table\DataTablePopup.cs" />
+    <Compile Include="Assets\Script\Table\DataTable_Popup.cs" />
     <Compile Include="Assets\Script\UI\Debug\DebugText.cs" />
     <Compile Include="Assets\Script\Manager\UIManager.cs" />
     <Compile Include="Assets\Script\UI\LogInComponent.cs" />
@@ -72,6 +72,7 @@
     <Compile Include="Assets\Script\Manager\UserDataManager.cs" />
     <Compile Include="Assets\Script\Manager\PopupManager.cs" />
     <Compile Include="Assets\Script\Scenes\UIController.cs" />
+    <Compile Include="Assets\Script\UI\HUD\MenuHUD.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Firebase\Plugins\Firebase.Analytics.dll" />
@@ -304,6 +305,10 @@
       <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Assets\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Firebase.TaskExtension">
       <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
       <Private>False</Private>
@@ -318,10 +323,6 @@
     </Reference>
     <Reference Include="Firebase.Auth">
       <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Assets\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">

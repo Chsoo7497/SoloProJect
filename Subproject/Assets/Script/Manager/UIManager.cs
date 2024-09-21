@@ -54,7 +54,7 @@ namespace UIManager
 		}
 
 		public Dictionary<UIScreenLayer, List<GameObject>> UIPrefabs;
-		public Action ChangeActiveUI;
+		public Action<UIScreenLayer, GameObject> AddUIByLayer;
 		public void Init()
 		{
 			UIPrefabs = new Dictionary<UIScreenLayer, List<GameObject>>();
@@ -92,11 +92,11 @@ namespace UIManager
 				Debug.Log("GetComponent UIDesc error");
 				return;
 			}
-			List<GameObject> objects = new List<GameObject>();
-			if (UIPrefabs.TryGetValue(Desc.LayerType, out objects))
+			List<GameObject> LayerObjects = new List<GameObject>();
+			if (UIPrefabs.TryGetValue(Desc.LayerType, out LayerObjects))
 			{
-				objects.Add(UIObject);
-				ChangeActiveUI?.Invoke();
+				LayerObjects.Add(UIObject);
+				AddUIByLayer?.Invoke(Desc.LayerType, UIObject);
 			}
 		}
 
@@ -117,7 +117,6 @@ namespace UIManager
 					if (Desc == RemoveUIDesc)
 					{
 						objects.Remove(e);
-						ChangeActiveUI?.Invoke();
 						break;
 					}
 				}
@@ -150,7 +149,6 @@ namespace UIManager
 						}
 					}
 				}
-				ChangeActiveUI?.Invoke();
 			}
 		}
 		public string GetUIPrefabPath(string UIPrefabName)

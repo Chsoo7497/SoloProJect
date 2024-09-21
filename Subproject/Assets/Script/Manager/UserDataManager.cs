@@ -140,7 +140,7 @@ namespace UserDataManager
                     if (task.IsFaulted)
                     {
                         CheckError(task.Exception as AggregateException);
-                        //Debug.Log("SignIn Faulted error");
+                        Debug.Log("SignIn Faulted error");
                         AsyncError?.Invoke("로그인 실패");
                         return;
                     }
@@ -159,7 +159,9 @@ namespace UserDataManager
             {
                 if (task.IsFaulted)
                 {
-                    Debug.Log("Id error");
+                    Debug.Log("ReadUser error");
+                    AsyncError?.Invoke("로그인 실패");
+                    LogOut();
                 }
                 else if (task.IsCompleted)
                 {
